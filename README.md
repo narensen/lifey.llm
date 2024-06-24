@@ -40,11 +40,7 @@ Enter your question or statement in the text area and get responses related to s
 
 # Initialize Streamlit app
 `st.title("Gears: Your Self-Help Companion")`
-
-# Initialize LangChain memory
 `memory = ConversationBufferWindowMemory(k=5)`
-
-# Initialize Groq Langchain chat object with updated API key and model name
    ```bash
    groq_api_key = "https://console.groq.com/keys"
    model_name = "llama3-70b-8192"
