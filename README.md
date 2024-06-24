@@ -45,7 +45,8 @@ st.title("Gears: Your Self-Help Companion")
 memory = ConversationBufferWindowMemory(k=5)
 
 # Initialize Groq Langchain chat object with updated API key and model name
-groq_api_key = "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"
+```bash
+groq_api_key = "https://console.groq.com/keys"
 model_name = "llama3-70b-8192"
 groq_chat = ChatGroq(
     groq_api_key=groq_api_key,
