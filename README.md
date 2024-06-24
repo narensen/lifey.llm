@@ -92,6 +92,7 @@ Enter your question or statement in the text area and get responses related to s
            display_message(user_question, ai_response)
        else:
            st.write("Sorry, the response is not relevant to self-help topics. Please ask another question related to mental health, personal growth, relationships, or productivity.")
+```bash
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
 
