@@ -34,9 +34,11 @@ Usage
 Run the Streamlit App:
 
 streamlit run gears_self_help.py
+
 Interact with the Chatbot:
 
 Enter your question or statement in the text area and get responses related to self-help topics.
+(The Similarity Cosine has some issues so even if the prompt is off topic it might still answer)
 
 # Initialize Streamlit app
 `st.title("Gears: Your Self-Help Companion")`
