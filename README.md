@@ -1,4 +1,4 @@
-# Gears:-
+# Gears
 
 Gears is a self-help chatbot application built using Streamlit, LangChain, and Groq. It leverages natural language processing to provide assistance on various self-help topics, including mental health, personal growth, relationships, and productivity.
 
