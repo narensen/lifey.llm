@@ -97,6 +97,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## Acknowledgments
 Built with Streamlit, LangChain, and Groq.
 Sentence embeddings provided by SentenceTransformers.
+Used Llama-3 for interaction
 
 
 Feel free to adjust the content to better fit your specific project needs and details.
