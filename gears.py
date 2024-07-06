@@ -12,7 +12,7 @@ st.title("gears.llm")
 memory = ConversationBufferWindowMemory(k=5)
 
 # Initialize Groq Langchain chat object with updated API key and model name
-groq_api_key = "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"
+groq_api_key = ""
 model_name = "llama3-70b-8192"
 groq_chat = ChatGroq(
     groq_api_key=groq_api_key,
