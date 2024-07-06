@@ -33,9 +33,9 @@ Run the Application:
 ## Usage
 Enter GROQ API Key: Paste your GROQ API Key into the provided text input field.
 
-Ask a Question: Type a question related to mental health, personal growth, relationships, or productivity into the text area labeled "How are you feeling today?" and press Enter.
+`Ask a Question: Type a question related to mental health, personal growth, relationships, or productivity into the text area labeled "How are you feeling today?"` and press Enter.
 
-View AI Response: If the response is relevant to self-help topics (detected using embeddings and keywords), it will be displayed under an expander labeled "Click to see AI's response".
+`View AI Response: If the response is relevant to self-help topics (detected using embeddings and keywords), it will be displayed under an expander labeled` "Click to see AI's response".
 
 Explore Interaction History: Use the checkbox labeled "Show Previous Interactions" to expand and review previous user inputs and AI responses.
 
