@@ -42,9 +42,6 @@ Explore Interaction History: Use the checkbox labeled "Show Previous Interaction
 ## Project Purpose
 The purpose of Gears.llm is to provide a supportive AI-based tool for users seeking information and advice on topics related to mental well-being, personal development, and relationship management. By leveraging advanced language models and conversation memory, the application aims to enhance user engagement and provide valuable insights into self-help areas.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
 ## Acknowledgments
 Built using Streamlit, PyTorch, TensorFlow, and Sentence Transformers.
 Inspired by the need for accessible and responsive tools in the realm of mental health and personal growth.
