@@ -1,6 +1,6 @@
-# gears.llm
+# lifey.llm
 
-Gears.llm is a Streamlit web application that acts as a self-help companion using a language model and conversation memory to respond to user queries related to mental health, personal growth, relationships, and productivity.
+lifey.llm is a Streamlit web application that acts as a self-help companion using a language model and conversation memory to respond to user queries related to mental health, personal growth, relationships, and productivity.
 
 ## Features
 
@@ -22,7 +22,7 @@ Gears.llm is a Streamlit web application that acts as a self-help companion usin
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/narensen/gears.llm.git
+   git clone https://github.com/narensen/lifey.llm.git
    cd your-repository
 Install Dependencies:
 `pip install streamlit torch tensorflow sentence-transformers`
