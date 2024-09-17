@@ -4,7 +4,7 @@ lifey.llm is a Streamlit web application that acts as a self-help companion usin
 
 ## Features
 
-- **API Integration**: Utilizes the GROQ API based on user input.
+- **API Integration**: Utilizes the Gemini API based on user input.
 - **Self-Help Topic Detection**: Determines if user queries are related to self-help topics using embeddings and predefined keywords.
 - **Conversation History**: Maintains a history of user interactions and AI responses using Streamlit session state.
 - **Dynamic Response Display**: Expands AI responses for user review and interaction history exploration.
