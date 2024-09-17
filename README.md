@@ -31,7 +31,7 @@ Run the Application:
 
 
 ## Usage
-Enter GROQ API Key: Paste your Gemini API Key into the provided text input field.
+Enter Gemini API Key: Paste your Gemini API Key into the provided text input field.
 
 `Ask a Question: Type a question related to mental health, personal growth, relationships, or productivity into the text area labeled "How are you feeling today?"` and press Enter.
 
