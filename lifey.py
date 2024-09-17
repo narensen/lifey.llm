@@ -28,7 +28,7 @@ memory = ConversationBufferWindowMemory(k=5)
 
 # User input field for API key
 #st.subheader("Enter your Gemini API Key:")
-gemini_api_key = "AIzaSyCM0tK3ljTw79tuMx_s4-afMxmOqNwPGRc"
+gemini_api_key = "Enter your API KEY"
 
 if gemini_api_key:
     # Initialize Gemini chat object
