@@ -16,7 +16,7 @@ lifey.llm is a Streamlit web application that acts as a self-help companion usin
 - PyTorch
 - TensorFlow
 - Sentence Transformers
-- GROQ API Key (required for functionality)
+- Gemini API Key (required for functionality)
 
 ## Installation and Setup
 
@@ -31,7 +31,7 @@ Run the Application:
 
 
 ## Usage
-Enter GROQ API Key: Paste your GROQ API Key into the provided text input field.
+Enter GROQ API Key: Paste your Gemini API Key into the provided text input field.
 
 `Ask a Question: Type a question related to mental health, personal growth, relationships, or productivity into the text area labeled "How are you feeling today?"` and press Enter.
 
