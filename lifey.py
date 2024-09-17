@@ -1,3 +1,4 @@
+# Import necessary libraries
 import streamlit as st
 import numpy as np
 import torch
@@ -6,49 +7,46 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from sentence_transformers import SentenceTransformer, util
 
-# Initialize Streamlit app
+# Set up Streamlit app UI
 st.title("Lifey")
 
-# Function to check if the user's question is related to self-help using embeddings
+# Check if user's question relates to self-help topics using embeddings
 def is_self_help_question(question, embedding_model, self_help_embeddings):
-    threshold = 0.25  # Adjusted threshold
+    threshold = 0.25  # Set similarity threshold
     question_embedding = embedding_model.encode(question, convert_to_tensor=True)
     similarities = util.pytorch_cos_sim(question_embedding, self_help_embeddings)
     max_similarity = torch.max(similarities).item()
-    return max_similarity > threshold
+    return max_similarity > threshold  # Return True if similarity is above threshold
 
-# Function to append conversation history
+# Function to store conversation history
 def append_to_history(user_input, ai_response):
     if 'history' not in st.session_state:
-        st.session_state.history = []
+        st.session_state.history = []  # Initialize history if not present
     st.session_state.history.append({'user_input': user_input, 'ai_response': ai_response})
 
-# Initialize LangChain memory
+# Initialize memory for conversation history (last 5 interactions)
 memory = ConversationBufferWindowMemory(k=5)
 
-# User input field for API key
-#st.subheader("Enter your Gemini API Key:")
-gemini_api_key = "AIzaSyCM0tK3ljTw79tuMx_s4-afMxmOqNwPGRc"
+gemini_api_key = "GOOGLEAPI_KEY"
 
 if gemini_api_key:
-    # Initialize Gemini chat object
-    model_name = "gemini-pro"  # Use the appropriate Gemini model name
+    model_name = "gemini-pro"  
     gemini_chat = ChatGoogleGenerativeAI(
         model=model_name,
         google_api_key=gemini_api_key,
-        temperature=0.7
+        temperature=0.7  # Control response creativity
     )
 
-    # Initialize conversation chain
+    # Initialize conversation chain with memory
     conversation = ConversationChain(
         llm=gemini_chat,
         memory=memory
     )
 
-    # Initialize Sentence Transformer model
+    # Load a pre-trained embedding model
     embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
-    # Self-help topics
+    # Define self-help-related keywords
     self_help_keywords = [
         "self help", "mental health", "emotional well-being", "stress management",
         "personal growth", "positive thinking", "mindfulness", "motivation",
@@ -77,32 +75,33 @@ if gemini_api_key:
         "feeling", "felt", "thoughts", "suicide"
     ]
 
-    # Encode the self-help keywords
+    # Convert self-help keywords to embeddings
     self_help_embeddings = embedding_model.encode(self_help_keywords, convert_to_tensor=True)
 
-    # User input field
+    # Initial system message for Lifey AI
     user_question_ = "(You are an AI-powered chatbot named Lifey or virtual assistant that leverages Gemini's natural language understanding and empathy to provide mental health and emotional support to students)"
-    response = conversation(user_question_)
-    user_question = st.text_area("How are you feeling today?")
+    response = conversation(user_question_)  # Initialize conversation
+    user_question = st.text_area("How are you feeling today?")  # User input
 
-    # Handle user input
+    # If user submits a question, process it
     if user_question:
-        response = conversation(user_question)
+        response = conversation(user_question)  # Get AI response
         ai_response = response.get("response", "No response text found")
 
+        # Check if question is self-help related
         if is_self_help_question(user_question, embedding_model, self_help_embeddings):
-            append_to_history(user_question, ai_response)
-            with st.expander("Click to see AI's response"):
+            append_to_history(user_question, ai_response)  # Save to history
+            with st.expander("Click to see AI's response"):  # Show AI response
                 st.markdown(ai_response)
-        else:     
-            ai_response = response.get("response", "No response text found")
-            append_to_history(user_question, ai_response)
-            with st.expander("Click to see AI's response"):
+        else:
+            append_to_history(user_question, ai_response)  # Store response
+            with st.expander("Click to see AI's response"):  # Show AI response
                 st.markdown(ai_response)
-    # Show previous interactions
+
+    # Option to show conversation history if available
     if 'history' in st.session_state and st.session_state.history:
         if st.checkbox("Show Previous Interactions"):
-            for idx, interaction in enumerate(reversed(st.session_state.history)):
-                with st.expander(f"Interaction {idx + 1}"):
+            for idx, interaction in enumerate(reversed(st.session_state.history)):  # Show in reverse order
+                with st.expander(f"Interaction {idx + 1}"):  # Expandable history
                     st.markdown(f"*User Input:* {interaction['user_input']}")
                     st.markdown(f"*Gears:* {interaction['ai_response']}")
