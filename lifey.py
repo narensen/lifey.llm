@@ -2,8 +2,9 @@ import streamlit as st
 import numpy as np
 import torch
 import pandas as pd
-from langchain.chains import ConversationChain
+from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.prompts import PromptTemplate
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from sentence_transformers import SentenceTransformer, util
 
@@ -37,6 +38,10 @@ def append_to_history(user_input, ai_response):
 # Initialize LangChain memory
 memory = ConversationBufferWindowMemory(k=5)
 
+# Function to retrieve session history (used for RunnableWithMessageHistory)
+def get_session_history():
+    return st.session_state.get("history", [])
+
 # User input field for API key
 gemini_api_key = "AIzaSyCM0tK3ljTw79tuMx_s4-afMxmOqNwPGRc"
 
@@ -49,15 +54,18 @@ if gemini_api_key:
         temperature=0.7
     )
 
-    # Initialize conversation chain
-    conversation = ConversationChain(
-        llm=gemini_chat,
+    # Initialize conversation with RunnableWithMessageHistory
+    conversation = RunnableWithMessageHistory(
+        runnable=gemini_chat,   # the LLM or chat model
+        get_session_history=get_session_history,  # function to get conversation history
         memory=memory
     )
 
     # User input field
-    user_question_ = "(You are an AI-powered chatbot named Lifey or virtual assistant that leverages Gemini's natural language understanding and empathy to provide mental health and emotional support to students\n you should not respond to any other kind of questions which are unrelated to mental health and life)"
-    response = conversation(user_question_)
+    user_question_ = "(You are an AI-powered chatbot named Lifey or virtual assistant that leverages Gemini's natural language understanding and empathy to provide mental health and emotional support to students. You should not respond to any other kind of questions which are unrelated to mental health and life.)"
+    
+    # Use invoke() method instead of __call__()
+    response = conversation.invoke(user_question_)
     user_question = st.text_area("How are you feeling today?")
 
     # Handle user input
@@ -72,9 +80,11 @@ if gemini_api_key:
 
         Please provide a response to the user's question, taking into account the similar context and suggested response if they are relevant. If the similarity score is low, you may disregard the suggested context and response."""
 
-        response = conversation(prompt)
+        # Pass the constructed prompt to the conversation chain
+        response = conversation.invoke(prompt)
         ai_response = response.get("response", "No response text found")
 
+        # Append to history and display AI's response
         append_to_history(user_question, ai_response)
         with st.expander("Click to see AI's response"):
             st.markdown(ai_response)
@@ -85,4 +95,4 @@ if gemini_api_key:
             for idx, interaction in enumerate(reversed(st.session_state.history)):
                 with st.expander(f"Interaction {idx + 1}"):
                     st.markdown(f"*User Input:* {interaction['user_input']}")
-                    st.markdown(f"*Gears:* {interaction['ai_response']}")
+                    st.markdown(f"*AI Response:* {interaction['ai_response']}")
