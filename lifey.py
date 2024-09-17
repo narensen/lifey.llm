@@ -2,12 +2,12 @@ import streamlit as st
 import numpy as np
 import torch
 from langchain.chains import ConversationChain
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
-from langchain_groq import ChatGroq
 from sentence_transformers import SentenceTransformer, util
 
 # Initialize Streamlit app
-st.title("gears.llm")
+st.title("Lifey")
 
 # Function to check if the user's question is related to self-help using embeddings
 def is_self_help_question(question, embedding_model, self_help_embeddings):
@@ -27,20 +27,21 @@ def append_to_history(user_input, ai_response):
 memory = ConversationBufferWindowMemory(k=5)
 
 # User input field for API key
-st.subheader("Enter your GROQ API Key:")
-groq_api_key = st.text_input("Paste your GROQ API Key here", type="password")
+#st.subheader("Enter your Gemini API Key:")
+gemini_api_key = "AIzaSyCM0tK3ljTw79tuMx_s4-afMxmOqNwPGRc"
 
-if groq_api_key:
-    # Initialize Groq Langchain chat object
-    model_name = "llama3-70b-8192"
-    groq_chat = ChatGroq(
-        groq_api_key=groq_api_key,
-        model_name=model_name
+if gemini_api_key:
+    # Initialize Gemini chat object
+    model_name = "gemini-pro"  # Use the appropriate Gemini model name
+    gemini_chat = ChatGoogleGenerativeAI(
+        model=model_name,
+        google_api_key=gemini_api_key,
+        temperature=0.7
     )
 
     # Initialize conversation chain
     conversation = ConversationChain(
-        llm=groq_chat,
+        llm=gemini_chat,
         memory=memory
     )
 
@@ -80,20 +81,24 @@ if groq_api_key:
     self_help_embeddings = embedding_model.encode(self_help_keywords, convert_to_tensor=True)
 
     # User input field
+    user_question_ = "(You are an AI-powered chatbot named Lifey or virtual assistant that leverages Gemini's natural language understanding and empathy to provide mental health and emotional support to students)"
+    response = conversation(user_question_)
     user_question = st.text_area("How are you feeling today?")
 
     # Handle user input
     if user_question:
         response = conversation(user_question)
-        ai_response = response.get("response", "No response text found")  # Get the response text
+        ai_response = response.get("response", "No response text found")
 
         if is_self_help_question(user_question, embedding_model, self_help_embeddings):
             append_to_history(user_question, ai_response)
             with st.expander("Click to see AI's response"):
                 st.markdown(ai_response)
-        else:
-            st.write("Sorry, the response is not relevant to self-help topics. Please ask another question related to mental health, personal growth, relationships, or productivity.")
-
+        else:     
+            ai_response = response.get("response", "No response text found")
+            append_to_history(user_question, ai_response)
+            with st.expander("Click to see AI's response"):
+                st.markdown(ai_response)
     # Show previous interactions
     if 'history' in st.session_state and st.session_state.history:
         if st.checkbox("Show Previous Interactions"):
