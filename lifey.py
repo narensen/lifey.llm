@@ -6,7 +6,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from sentence_transformers import SentenceTransformer, util
 
 # Load CSV data
-df = pd.read_csv('mhc.csv')
+df = pd.read_csv('corpus/mhc.csv')
 contexts = df['Context'].tolist()
 responses = df['Response'].tolist()
 
