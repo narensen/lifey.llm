@@ -9,7 +9,7 @@ from sentence_transformers import SentenceTransformer, util
 df = pd.read_csv('corpus/mhc.csv')
 contexts = df['Context'].tolist()
 responses = df['Response'].tolist()
-
+    
 # Initialize Streamlit app
 st.title("Lifey")
 
@@ -31,7 +31,7 @@ if 'conversation_history' not in st.session_state:
     st.session_state.conversation_history = []
 
 # User input field for API key
-gemini_api_key = #Enter your API key
+gemini_api_key = "AIzaSyCM0tK3ljTw79tuMx_s4-afMxmOqNwPGRc"
 
 if gemini_api_key:
     # Initialize Gemini chat object

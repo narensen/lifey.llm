@@ -1,0 +1,6 @@
+streamlit==1.27.2
+numpy==1.23.5
+torch==2.0.1
+pandas==2.1.1
+langchain-google-genai==0.0.4
+sentence-transformers==2.2.2
