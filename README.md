@@ -9,6 +9,9 @@ lifey.llm is a Streamlit web application that acts as a self-help companion usin
 - **Conversation History**: Maintains a history of user interactions and AI responses using Streamlit session state.
 - **Dynamic Response Display**: Expands AI responses for user review and interaction history exploration.
 
+## Deployed Link
+https://lifey-llm.streamlit.app
+
 ## Requirements
 
 - Python
