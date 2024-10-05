@@ -1,7 +1,6 @@
 # lifey.llm
 
 lifey.llm is a Streamlit web application that acts as a self-help companion using a language model and conversation memory to respond to user queries related to mental health, personal growth, relationships, and productivity.
-https://lifeyllm.streamlit.app/ FOR DEPLOYED VERSION
 
 ## Features
 
@@ -9,6 +8,9 @@ https://lifeyllm.streamlit.app/ FOR DEPLOYED VERSION
 - **Self-Help Topic Detection**: Determines if user queries are related to self-help topics using embeddings and predefined keywords.
 - **Conversation History**: Maintains a history of user interactions and AI responses using Streamlit session state.
 - **Dynamic Response Display**: Expands AI responses for user review and interaction history exploration.
+
+## Deployed Link
+https://lifey-llm.streamlit.app
 
 ## Requirements
 
