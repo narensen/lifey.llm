@@ -33,9 +33,6 @@ def find_most_similar_context(question, context_embeddings):
 if 'conversation_history' not in st.session_state:
     st.session_state.conversation_history = []
 
-# User input field for API key
-gemini_api_key = "AIzaSyCM0tK3ljTw79tuMx_s4-afMxmOqNwPGRc"
-
 if gemini_api_key:
     # Initialize Gemini chat object
     model_name = "gemini-pro"
